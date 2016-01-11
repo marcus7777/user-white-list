@@ -1,47 +1,17 @@
-<link rel="import" href="../show-once/show-once.html">
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../paper-material/paper-material.html">
-<link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <!--
 `<white-list-item style="display:block" white-list="{{item}}"></white-list-item>`
 -->
 <dom-module id="white-list-item">
   <template>
-    <template is="dom-if" if="{{showOnce}}">
-      <show-once>
-        Q: {{white-list.question}}
-        <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-        <paper-button raised="1" on-tap="no">{{No}}</paper-button>
-      </show-once>
-    </template>
     <template is="dom-if" if="{{edit}}">
-      <paper-textarea char-counter maxlength="25" value="{{white-list.question::change}}" disabled label="Question"></paper-textarea>
-      <div id="white-listq">
-        <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete white-list" tabindex="0" on-tap="_onDelete"></paper-icon-button>
-      </div>
+      <paper-input char-counter maxlength="25" value="{{whiteList.link::change}}" label="Domain"></paper-input>
+      <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete white-list Item" on-tap="_onDelete"></paper-icon-button>
     </template>
-    <template is="dom-if" if="{{answered}}">
-      <div id="survques" style="margin:5px; font-size: 16px; font-weight: 200;">
-        {{whiteList.question}}
-        <br />
-      </div>
-      <template is="dom-if" if="{{whiteList.answer}}">
-        <div id="survanswer" style="margin:5px;">
-          {{whiteList.answer}}
-        </div>
-      </template>
-    </template>
-    <template is="dom-if" if="{{answer}}">
-      <div id="ques" style="margin-bottom: 30px;">
-        Q: [[whiteList.question]]
-      </div>
-      <span>
-         <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
-         <paper-button raised="1" on-tap="no">{{No}}</paper-button>
-      </span>
-    </template>
+    <div style="margin-bottom: 30px;">
+      [[whiteList.link]]
+    </div>
   </template>
 </dom-module>
 <script>

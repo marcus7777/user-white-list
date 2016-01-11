@@ -1,7 +1,6 @@
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-input/paper-textarea.html">
 <!-- 
 `<white-list-input on-add-badge="addWhiteList"></white-list-input>`
 -->
@@ -9,7 +8,7 @@
   <template>
     <paper-button on-tap="add" style="background: #FF5722;color: #FFF;margin: 20px;">Add</paper-button>
     <paper-dialog modal style="width:350px; height: 200px;">
-        <paper-textarea value="{{whiteListQ::change}}" label="Question" char-counter maxlength="25"></paper-textarea>
+        <paper-input value="{{whiteListItem::change}}" label="URL" char-counter maxlength="25"></paper-input>
         <div class="buttons">
           <paper-button dialog-confirm on-tap="_add" style="background: #FF5722;color: #FFF;" raised on-tap="toggleView">Add</paper-button>
           <paper-button dialog-dismiss>Cancel</paper-button>
@@ -26,11 +25,11 @@ Polymer({
     }
   },
   _add: function() {
-    if (this.whiteListQ) {
+    if (this.whiteListItem) {
       this.fire('add-white-list', {
-        Q: this.whiteListQ
+        Item: this.whiteListItem
       });
-      this.whiteListQ = null;
+      this.whiteListItem = null;
       this.$$('paper-dialog').close();
     }
   },
