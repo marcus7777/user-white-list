@@ -1,0 +1,107 @@
+<link rel="import" href="../show-once/show-once.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<!--
+`<white-list-item style="display:block" white-list="{{item}}"></white-list-item>`
+-->
+<dom-module id="white-list-item">
+  <template>
+    <template is="dom-if" if="{{showOnce}}">
+      <show-once>
+        Q: {{white-list.question}}
+        <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
+        <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+      </show-once>
+    </template>
+    <template is="dom-if" if="{{edit}}">
+      <paper-textarea char-counter maxlength="25" value="{{white-list.question::change}}" disabled label="Question"></paper-textarea>
+      <div id="white-listq">
+        <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete white-list" tabindex="0" on-tap="_onDelete"></paper-icon-button>
+      </div>
+    </template>
+    <template is="dom-if" if="{{answered}}">
+      <div id="survques" style="margin:5px; font-size: 16px; font-weight: 200;">
+        {{whiteList.question}}
+        <br />
+      </div>
+      <template is="dom-if" if="{{whiteList.answer}}">
+        <div id="survanswer" style="margin:5px;">
+          {{whiteList.answer}}
+        </div>
+      </template>
+    </template>
+    <template is="dom-if" if="{{answer}}">
+      <div id="ques" style="margin-bottom: 30px;">
+        Q: [[whiteList.question]]
+      </div>
+      <span>
+         <paper-button raised="1" on-tap="yes">{{Yes}}</paper-button>
+         <paper-button raised="1" on-tap="no">{{No}}</paper-button>
+      </span>
+    </template>
+  </template>
+</dom-module>
+<script>
+var shown
+Polymer({
+  is: 'white-list-item',
+  _onDelete: function() {
+    this.fire('delete-white-list-item', {
+      white-list: this.white-list
+    });
+  },
+  yes: function() {
+    this.set("whiteList.answer", this.Yes)
+    this.set("whiteList.isComplete", true)
+  },
+  no: function() {
+    this.set("whiteList.answer", this.No)
+    this.set("whiteList.isComplete", true)
+  },
+  properties: {
+    edit: {
+      type: Boolean,
+      value: false
+    },
+    answer: {
+      type: Boolean,
+      value: false
+    },
+    answered: {
+      type: Boolean,
+      value: false
+    },
+    No: {
+      value: 'No'
+    },
+    Yes: {
+      value: 'Yes'
+    },
+    white-list: {
+      notify: true
+    },
+    showOnce: {
+      computed: "getShowOnce(edit, answer, index)"
+    }
+  },
+  getShowOnce: function(edit, answer, index) {
+    if (!shown && index === 0) {
+      shown = true
+      return (!edit && answer)
+    } else {
+      return false
+    }
+  },
+  getShowOnce(question, edit, answer) {
+    return (!edit && answer)
+  },
+  _onDelete: function() {
+    this.fire('delete-white-list', {
+      whiteList: this.whiteList
+    });
+  }
+});
+</script>

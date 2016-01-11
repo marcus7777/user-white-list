@@ -1,0 +1,14 @@
+{
+  "name": "user-white-list",
+  "version": "1.0.0",
+  "description": "user-white-list",
+  "main": "user-white-list.html",
+  "keywords": [
+    "polymer","web-components"
+  ],
+  "dependencies": {
+    "polymer": "*",
+    "paper-material":"PolymerElements/paper-material",
+    "paper-icon-button":"PolymerElements/paper-icon-button"
+  }
+}

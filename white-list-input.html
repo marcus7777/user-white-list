@@ -1,0 +1,41 @@
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<!-- 
+`<white-list-input on-add-badge="addWhiteList"></white-list-input>`
+-->
+<dom-module id="white-list-input">
+  <template>
+    <paper-button on-tap="add" style="background: #FF5722;color: #FFF;margin: 20px;">Add</paper-button>
+    <paper-dialog modal style="width:350px; height: 200px;">
+        <paper-textarea value="{{whiteListQ::change}}" label="Question" char-counter maxlength="25"></paper-textarea>
+        <div class="buttons">
+          <paper-button dialog-confirm on-tap="_add" style="background: #FF5722;color: #FFF;" raised on-tap="toggleView">Add</paper-button>
+          <paper-button dialog-dismiss>Cancel</paper-button>
+        </div>
+    </paper-dialog>
+  </template>
+</dom-module>
+<script>
+Polymer({
+  is: 'white-list-input',
+  _checkAdd: function(e) {
+    if (e.keyCode === 13) {
+      this._add();
+    }
+  },
+  _add: function() {
+    if (this.whiteListQ) {
+      this.fire('add-white-list', {
+        Q: this.whiteListQ
+      });
+      this.whiteListQ = null;
+      this.$$('paper-dialog').close();
+    }
+  },
+  add: function() {
+    this.$$('paper-dialog').open();
+  }
+});
+</script>

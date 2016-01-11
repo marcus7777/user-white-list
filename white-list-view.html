@@ -1,0 +1,37 @@
+<link rel="import" href="white-list-list.html">
+<link rel="import" href="white-list-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../mediator-data/mediator-data.html">
+<!--
+`<white-list-view location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>`
+-->
+
+<dom-module id="white-list-view">
+  <template>
+    <mediator-data id="s" sync='["link"]' as-array="{{white-list}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
+    <white-list-list edit="[[edit]]" answer="[[answer]]" answered="[[answered]]" edit-default="[[editDefault]]" white-list="{{whiteList}}" on-delete-white-list="deleteWhiteListQuestion"></white-list-list>
+    <template is="dom-if" if="{{edit}}">
+      <white-list-input on-add-white-list="addWhiteListItem"></white-list-input>
+    </template>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "white-list-view",
+    properties: {
+      whiteList: Array,
+      edit: {type: Boolean, value: false},
+      answer: {type: Boolean, value: false},
+      answered: {type: Boolean, value: false},
+      editDefault: Boolean
+    },
+    addWhiteListItem: function(e) {
+      this.$.s.push({
+        link: e.detail.Q
+      });
+    },
+    toggleView: function() {
+      if (this.edit) this.admin = !this.admin;
+    }
+  });
+</script>
