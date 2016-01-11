@@ -10,12 +10,9 @@
       padding: 0 2px;
     }
     </style>
-    <white-list-view answenr="[[answer]]" answered="[[answered]]" location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
+    <white-list-view location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
     <template is="dom-if" if="{{editDefault}}">
-      <div id="tithere" style="padding-bottom: 50px;">
-        <h2 style="float: left; width:200px; padding:0;">white-list</h2>
-      </div>
-      <h3>Create or Delete white-list</h3>
+      <h2 style="float: left; width:200px; padding:0;">white-list</h2>
       <user-white-list edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-white-list>
     </template>
   </template>
@@ -30,14 +27,6 @@ Polymer({
       value: "default"
     },
     edit: {
-      type: Boolean,
-      value: false
-    },
-    answer: {
-      type: Boolean,
-      value: false
-    },
-    answered: {
       type: Boolean,
       value: false
     },

@@ -1,36 +1,13 @@
 <link rel="import" href="white-list-item.html">
-<link rel="import" href="../sortable-list/sortable-list.html">
 <!--
 `<white-list-list white-list="{{whiteList}}" on-delete-white-list="deleteWhiteList"></white-list-list>`
 -->
 <dom-module id="white-list-list">
   <template>
-    <template is="dom-if" if="{{answered}}">
-      <template is="dom-repeat" items="{{whiteList}}">
-        <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
-          <white-list-item answered white-list="{{item}}"></white-list-item>
-        </paper-material>
-      </template>
-    </template>
-    <template is="dom-if" if="{{edit}}">
-      <sortable-list style="display: inline-block; margin-left: 50px;">
-        <template is="dom-repeat" items="{{whiteList}}">
-          <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
-            <white-list-item edit white-list="{{item}}" on-delete-white-list="deleteWhiteList"></white-list-item>
-          </paper-material>
-        </template>
-      </sortable-list>
-    </template>
-    <!-- white-list Questions in the Account -->
-    <template is="dom-if" if="{{answer}}">
-      <template is="dom-if" if="{{!whiteList.length}}">
-        <h4>Thank you for you time. All Questions Answered.</h4>
-      </template>
-      <template is="dom-repeat" items="{{whiteList}}" filter="{{filterWhiteList(filterBy)}}">
-        <paper-material elevation="1" style="padding: 20px; float: left;margin: 10px;">
-          <div><white-list-item index="[[index]]" answer="[[answer]]" answered="[[answered]]" white-list="{{item}}"></white-list-item></div>
-        </paper-material>
-      </template>
+    <template is="dom-repeat" items="{{whiteList}}">
+      <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
+        <white-list-item edit="{{edit}}" white-list="{{item}}" on-delete-white-list="deleteWhiteList"></white-list-item>
+      </paper-material>
     </template>
   </template>
 </dom-module>
@@ -40,27 +17,9 @@
     properties: {
       whiteList: {notify:true},
       edit: {type: Boolean, value: false},
-      answer: {type: Boolean, value: false},
-      answered: {type: Boolean, value: false},
-      filterBy: {type:String,value:"not"}
     },
     deleteWhiteList: function(e) {
       this.arrayDelete('whiteList', e.detail.whiteList);
     },
-    filterWhiteList: function(filterBy) {
-      if (filterBy) {
-        // If filterBy is 'all', return a filter
-        if (filterBy === 'all') {
-          return function() {
-            return true
-          }
-        }
-        // Handle 'completed', or its inverse, 'active'
-        var ifNotComplete = !(filterBy === 'completed');
-        return function(item) {
-          return item.isComplete !== ifNotComplete;
-        };
-      }
-    }
   });
 </script>

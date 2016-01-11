@@ -20,58 +20,17 @@ Polymer({
   is: 'white-list-item',
   _onDelete: function() {
     this.fire('delete-white-list-item', {
-      white-list: this.white-list
+      whiteList: this.whiteList
     });
-  },
-  yes: function() {
-    this.set("whiteList.answer", this.Yes)
-    this.set("whiteList.isComplete", true)
-  },
-  no: function() {
-    this.set("whiteList.answer", this.No)
-    this.set("whiteList.isComplete", true)
   },
   properties: {
     edit: {
       type: Boolean,
       value: false
     },
-    answer: {
-      type: Boolean,
-      value: false
-    },
-    answered: {
-      type: Boolean,
-      value: false
-    },
-    No: {
-      value: 'No'
-    },
-    Yes: {
-      value: 'Yes'
-    },
     white-list: {
       notify: true
-    },
-    showOnce: {
-      computed: "getShowOnce(edit, answer, index)"
     }
-  },
-  getShowOnce: function(edit, answer, index) {
-    if (!shown && index === 0) {
-      shown = true
-      return (!edit && answer)
-    } else {
-      return false
-    }
-  },
-  getShowOnce(question, edit, answer) {
-    return (!edit && answer)
-  },
-  _onDelete: function() {
-    this.fire('delete-white-list', {
-      whiteList: this.whiteList
-    });
   }
 });
 </script>
