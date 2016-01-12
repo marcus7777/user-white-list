@@ -9,7 +9,7 @@
 <dom-module id="white-list-view">
   <template>
     <mediator-data id="s" sync='["link"]' as-array="{{whiteList}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
-    <white-list-list edit="[[edit]]" edit-default="[[editDefault]]" white-list="{{whiteList}}" on-delete-white-list="deleteWhiteListQuestion"></white-list-list>
+    <white-list-list edit="[[edit]]" edit-default="[[editDefault]]" white-list="{{whiteList}}" on-delete-white-list="deleteWhiteListItem"></white-list-list>
     <template is="dom-if" if="{{edit}}">
       <white-list-input on-add-white-list-item="addWhiteListItem"></white-list-input>
     </template>
@@ -21,8 +21,6 @@
     properties: {
       whiteList: Array,
       edit: {type: Boolean, value: false},
-      answer: {type: Boolean, value: false},
-      answered: {type: Boolean, value: false},
       editDefault: Boolean
     },
     addWhiteListItem: function(e) {
@@ -30,8 +28,8 @@
         link: e.detail.link
       });
     },
-    toggleView: function() {
-      if (this.edit) this.admin = !this.admin;
+    deleteWhiteListItem: function(e) {
+      this.arrayDelete('whiteList', e.detail.item);
     }
   });
 </script>
