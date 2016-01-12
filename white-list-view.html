@@ -8,7 +8,7 @@
 
 <dom-module id="white-list-view">
   <template>
-    <mediator-data id="s" sync='["link"]' as-array="{{white-list}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
+    <mediator-data id="s" sync='["link"]' as-array="{{whiteList}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
     <white-list-list edit="[[edit]]" edit-default="[[editDefault]]" white-list="{{whiteList}}" on-delete-white-list="deleteWhiteListQuestion"></white-list-list>
     <template is="dom-if" if="{{edit}}">
       <white-list-input on-add-white-list-item="addWhiteListItem"></white-list-input>
