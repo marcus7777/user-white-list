@@ -8,11 +8,11 @@
   <template>
     <paper-button on-tap="add" style="background: #FF5722;color: #FFF;margin: 20px;">Add</paper-button>
     <paper-dialog modal style="width:350px; height: 200px;">
-        <paper-input value="{{whiteListItem::change}}" label="URL" char-counter maxlength="25"></paper-input>
-        <div class="buttons">
-          <paper-button dialog-confirm on-tap="_add" style="background: #FF5722;color: #FFF;" raised on-tap="toggleView">Add</paper-button>
-          <paper-button dialog-dismiss>Cancel</paper-button>
-        </div>
+      <paper-input value="{{whiteListItem::change}}" label="URL" char-counter maxlength="25"></paper-input>
+      <div class="buttons">
+        <paper-button dialog-confirm on-tap="_add" style="background: #FF5722;color: #FFF;" raised on-tap="toggleView">Add</paper-button>
+        <paper-button dialog-dismiss>Cancel</paper-button>
+      </div>
     </paper-dialog>
   </template>
 </dom-module>
@@ -26,7 +26,7 @@ Polymer({
   },
   _add: function() {
     if (this.whiteListItem) {
-      this.fire('add-white-list', {
+      this.fire('add-white-list-item', {
         Item: this.whiteListItem
       });
       this.whiteListItem = null;
