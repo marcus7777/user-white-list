@@ -6,7 +6,7 @@
   <template>
     <template is="dom-repeat" items="{{whiteList}}">
       <paper-material style="background:#fff;padding:20px;margin:5px;width:250px; float:left;">
-        <white-list-item edit="{{edit}}" white-list="{{item}}" on-delete-white-list="deleteWhiteList"></white-list-item>
+        <white-list-item edit="{{edit}}" white-list="{{item}}" on-delete-white-list-Item="deleteWhiteListItem"></white-list-item>
       </paper-material>
     </template>
   </template>
@@ -18,8 +18,8 @@
       whiteList: {notify:true},
       edit: {type: Boolean, value: false},
     },
-    deleteWhiteList: function(e) {
+    deleteWhiteListItem: function(e) {
       this.arrayDelete('whiteList', e.detail.whiteList);
-    },
+    }
   });
 </script>
