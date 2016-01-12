@@ -27,7 +27,7 @@ Polymer({
   _add: function() {
     if (this.whiteListItem) {
       this.fire('add-white-list-item', {
-        Item: this.whiteListItem
+        link: this.whiteListItem
       });
       this.whiteListItem = null;
       this.$$('paper-dialog').close();
