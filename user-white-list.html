@@ -10,8 +10,10 @@
       padding: 0 2px;
     }
     </style>
-    <h2>Your white list</h2>
-    <white-list-view location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
+    <template is="dom-if" if="{{!editDefault}}">
+      <h2>Your white list</h2>
+      <white-list-view location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
+    </template>
     <template is="dom-if" if="{{editDefault}}">
       <h2 style="float: left; width:200px; padding:0;">Default white-list</h2>
       <user-white-list edit location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-white-list>
