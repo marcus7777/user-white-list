@@ -9,7 +9,7 @@
       <paper-input char-counter maxlength="25" value="{{whiteList.link::change}}" label="Domain"></paper-input>
       <paper-icon-button style="color:gray;float:right;right:-50px;top:15px" icon="delete" aria-label="Delete white-list Item" on-tap="_onDelete"></paper-icon-button>
     </template>
-    <template is="dom-if" if="{{pUser}}">
+    <template is="dom-if" if="{{visits}}">
       <div style="margin-bottom:30px">
         visits {{visits}}
       </div>
