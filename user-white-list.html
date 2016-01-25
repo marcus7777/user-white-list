@@ -11,7 +11,7 @@
     }
     </style>
     <template is="dom-if" if="{{!editDefault}}">
-      <white-list-view location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
+      <white-list-view p-user="{{folder}}" location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
     </template>
     <template is="dom-if" if="{{editDefault}}">
       <h2 style="float: left; width:200px; padding:0;">Default white-list</h2>
