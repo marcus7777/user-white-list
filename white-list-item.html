@@ -7,10 +7,10 @@
   <template>
     <template is="dom-if" if="{{edit}}">
       <paper-input char-counter maxlength="25" value="{{whiteList.link::change}}" label="Domain"></paper-input>
-      <paper-icon-button style="color:gray; float:right; right: -50px; top: 15px;" icon="delete" aria-label="Delete white-list Item" on-tap="_onDelete"></paper-icon-button>
+      <paper-icon-button style="color:gray;float:right;right:-50px;top:15px" icon="delete" aria-label="Delete white-list Item" on-tap="_onDelete"></paper-icon-button>
     </template>
-    <div style="margin-bottom: 30px;">
-      [[whiteList.link]]
+    <div style="margin-bottom:30px">
+      visits {{visits}}
     </div>
   </template>
 </dom-module>
@@ -23,6 +23,17 @@ Polymer({
       whiteList: this.whiteList
     });
   },
+  getVisits: function(link, log) {
+    var linkEncode = encodeURIComponent(link).replace(/\./g, '%2E')
+    var theCount = 0
+    for (user in log) {
+      for (theLog in log[user])
+      if (log[user][theLog][linkEncode]) {
+        theCount = +theCount + +log[user][theLog][linkEncode]
+      }
+    } 
+    return theCount
+  },
   properties: {
     edit: {
       type: Boolean,
@@ -30,7 +41,8 @@ Polymer({
     },
     whiteList: {
       notify: true
-    }
+    },
+    visits:{ computed:"getVisits(whiteList.link, log)"}
   }
 });
 </script>
