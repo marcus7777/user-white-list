@@ -8,9 +8,9 @@
 
 <dom-module id="white-list-view">
   <template>
-    <mediator-data id="s" sync='["link"]' as-array="{{whiteList}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
+    <mediator-data id="s" data-all="{{data}}" sync='["link"]' as-array="{{whiteList}}" location="{{location}}" folder="[[folder]]" default-folder="{{defaultFolder}}"></mediator-data>
     <div>
-      <white-list-list edit="[[edit]]" edit-default="[[editDefault]]" white-list="{{whiteList}}"></white-list-list>
+      <white-list-list edit="[[edit]]" log="{{log}}" edit-default="[[editDefault]]" white-list="{{whiteList}}"></white-list-list>
     </div>
     <template is="dom-if" if="{{edit}}">
       <white-list-input on-add-white-list-item="addWhiteListItem"></white-list-input>
@@ -23,12 +23,29 @@
     properties: {
       whiteList: Array,
       edit: {type: Boolean, value: false},
-      editDefault: Boolean
+      editDefault: Boolean,
+      log: {computed:"getLog(data, pUser)"}
     },
     addWhiteListItem: function(e) {
       this.$.s.push({
         link: e.detail.link
       });
+    },
+    getLog: function(data, pUser) {
+      output = {}
+      for (user in data[pUser].users) {
+        if (data[pUser].users[user].log) {
+          for (theLog in data[pUser].users[user].log) {
+            if (data[pUser].users[user].log[theLog].sites) {
+              if (!output[user]) {
+                output[user] = {}
+              }
+              output[user][theLog] = data[pUser].users[user].log[theLog].sites
+            }
+          }
+        }
+      }
+      return output
     }
   });
 </script>
