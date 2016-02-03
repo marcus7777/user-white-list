@@ -6,22 +6,9 @@
 <dom-module id="user-white-list">
   <template>
     <style>
-    paper-dialog > * {
-      padding: 0 2px;
-    }
+    :host paper-dialog > * {padding: 0 2px}
     </style>
-    <template is="dom-if" if="{{!editDefault}}">
-      <div id="listofUserHeading" style="height: 50px; width: 100%; background-color: green; padding: 2px 0 20px 20px;">
-        <h2 style="color: #FFF; float:left;">White List</h2>
-        <iron-icon icon="account-circle" style="
-          color: #FFF; height: 40px; width: 40px; float: right; margin: 15px 20px 0px 0px;}"></iron-icon>
-      </div>
-      <white-list-view p-user="{{pUser}}" location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
-    </template>
-    <template is="dom-if" if="{{editDefault}}">
-      <h2 style="float: left; width:200px; padding:0;">Default white-list</h2>
-      <user-white-list edit p-user="{{pUser}}" location="[[location]]" filter-by="all" folder="[[defaultFolder]]"></user-white-list>
-    </template>
+    <white-list-view p-user="{{pUser}}" location="[[location]]" edit="{{edit}}" folder="[[whiteListFolder]]" default-folder="{{whiteListDefaultFolder}}" edit-default="{{editDefault}}"></white-list-view>
   </template>
 </dom-module>
 <script>
